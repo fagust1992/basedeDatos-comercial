@@ -479,7 +479,7 @@
 
   function eliminarCancion(i, id) {
     axios.delete(url + "/" + id).then(() => {
-      alert("Canción " + canciones[i].titulo + " eliminada");
+      alert("Cliente " + canciones[i].titulo + " eliminado");
       getData();
     });
   }
