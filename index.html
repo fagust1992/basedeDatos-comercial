@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://www.asthronsur.cl/images/distridrenes.png"
+      type="image/png"
+    />
+    <title>BIOPLASTIC</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </head>
+
+  <body>
+    <div id="AgregarCancion">
+      <h2 class="pt-3 h2">$BIOPLASTIC BASE DE DATOS CLIENTES$</h2>
+      <p class="autor">Francisco August</p>
+      <img src="" />
+
+      <div class="container pt-6 w-50">
+        <div class="formulario">
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">NOMBRE:</label>
+            <div class="col col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="cancion"
+                value="A dios le pido"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">RUT: </label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="artista"
+                value="Juanes"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">PRODUCTOS:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="tono" value="Em" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">COMUNA:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="comuna" value="Em" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">CORREO:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="correo" value="Em" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">TELEFONO:</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="telefono"
+                value="Em"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">COTIZACION:</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="cotizacion"
+                value="Em"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">FECHA:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="fecha" value="Em" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rut" class="col-sm-2 col-form-label">VENCE:</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="vencimiento"
+                value="Em"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="comentarios" class="col-sm-2">SEGUIM:</label>
+            <div class="col-sm-12">
+              <textarea
+                class="form-control"
+                id="comentarios"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+          <input type="text" id="searchInput" placeholder="Rut cliente" />
+
+          <input type="text" id="fechaInput" placeholder="Fecha inicio" />
+          <input type="text" id="vencimientoInput" placeholder="vencimiento" />
+          <input type="text" id="status" placeholder="Status" />
+
+          <button type="button" onclick="buscar()" id="btnBuscar">
+            Buscar
+          </button>
+
+          <button
+            onclick="nuevaCancion()"
+            id="agregar"
+            class="m-auto btn btn-success"
+          >
+            Agregar
+          </button>
+          <button
+            onclick="editarCancion()"
+            id="editar"
+            class="m-auto btn btn-info"
+          >
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="ListaCanciones">
+      <hr />
+      <hr />
+      <h2 class="h2">Tabla de se seguimientos de clientes;</h2>
+      <button id="back" onclick="getData()">volver</button>
+      <div class="tbody"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>
+
+<style>
+  body {
+    background-color: #000000;
+  }
+  .autor {
+    text-align: center;
+    color: #ffffff;
+  }
+
+  h2 {
+    font-size: 18px;
+    color: #afbb0f;
+  }
+  h1 {
+    color: #276b07;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .form-group label {
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+  }
+  .btn-primary {
+    background-color: #fd7e14;
+    border-color: #fd7e14;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .h2 {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .formulario {
+    background-image: url("ruta/a/la/imagen.jpg");
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px auto;
+
+    border: 1px solid #ffffff;
+  }
+  .formulario input {
+    background: #f3cd85;
+  }
+  .formulario textarea {
+    background: #f3cd85;
+  }
+
+  .formulario h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .formulario label {
+    font-weight: bold;
+    font-size: 13px;
+  }
+  .formulario button {
+    margin-top: 20px;
+  }
+  .formulario label {
+    font-weight: bold;
+    color: #afbb0f;
+  }
+  #back {
+    display: none;
+    background: #276b07;
+    padding: 10px;
+    margin: auto;
+    color: #fff;
+    border-radius: 30px;
+  }
+  .bio {
+    width: 300px;
+    height: 200px;
+    margin: auto;
+  }
+  .container {
+    width: 100%;
+    font-size: 13px;
+  }
+  .tr {
+    font-size: 8px;
+  }
+  .btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  .td button {
+    position: relative;
+    font-size: 15px;
+  }
+  .correo {
+    position: relative;
+    right: 12px;
+  }
+  .card ul li {
+    background: transparent;
+  }
+  .card {
+    box-shadow: 0px 2px 2px #fff;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #bef2ff;
+    margin: 20px;
+    width: 300px;
+    color: #0e0b0b;
+    border: 1px solid#ffffff;
+    font-weight: 500;
+  }
+
+  .card h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .card .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card button {
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .card button:hover {
+    background-color: #0c4f96;
+  }
+  .card-subtitle {
+    color: rgb(64, 22, 117);
+  }
+  /* Estilos para pantallas más pequeñas que 768px */
+  @media screen and (max-width: 980px) {
+    .formulario {
+      width: 380px;
+      position: relative;
+      right: 95px;
+    }
+
+    .card {
+      margin: 15px auto;
+    }
+    /* Ajustar tamaño de la tabla */
+
+    /* Ajustar tamaño de los botones */
+    .btn {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  }
+  .btn-container {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  /* Estilos para pantallas más pequeñas que 576px */
+  @media screen and (max-width: 576px) {
+    /* Ajustar tamaño de la tabla */
+    .table {
+      font-size: 12px;
+    }
+
+    /* Ajustar tamaño del texto en los botones */
+    .btn {
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+  }
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  footer p {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+
+<script>
+  let url = "/canciones";
+  let tbody = document.getElementById("cuerpo");
+  let cancion = document.getElementById("cancion");
+  let artista = document.getElementById("artista");
+  let tono = document.getElementById("tono");
+  let comuna = document.getElementById("comuna");
+  let cotizacion = document.getElementById("cotizacion");
+  let fecha = document.getElementById("fecha");
+  let comentarios = document.getElementById("comentarios");
+  let telefono = document.getElementById("telefono");
+  let correo = document.getElementById("correo");
+  let vencimiento = document.getElementById("vencimiento");
+  const x = document.querySelector("#back");
+
+  let canciones = [];
+  window.onload = getData();
+  async function getData() {
+    await axios.get(url).then((data) => {
+      canciones = data.data;
+      const tbody = document.querySelector(".tbody");
+      if (!tbody) {
+        console.error("No se encontró el elemento tbody");
+        return;
+      }
+      tbody.innerHTML = "";
+      console.log(canciones);
+      const containerHTML = `
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          ${canciones
+            .map(
+              (c, i) => `
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"> ${c.titulo}</h5>
+                      <h6 class="card-subtitle mb-2 ">
+                        Rut:
+                        ${c.artista}</h6>
+                      <p class="card-text status">
+                        Seguimiento:
+                        ${c.comentarios}</p>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Productos:</strong> ${c.tono}</li>
+                        <li class="list-group-item"><strong>Comuna:</strong> ${c.comuna}</li>
+                        <li class="list-group-item"><strong>Cotización:</strong> ${c.cotizacion}</li>
+                        <li class="list-group-item fecha_inicio"><strong>Fecha:</strong> ${c.fecha}</li>
+                        <li class="list-group-item vencimiento"><strong>Vencimiento:</strong> ${c.vencimiento}</li>
+                        <li class="list-group-item"><strong>Teléfono:</strong> ${c.telefono}</li>
+                        <li class="list-group-item"><strong>Correo:</strong> ${c.correo}</li>
+                      </ul>
+                      <div class="btn-group mt-2">
+                        <button class="btn btn-info x" onclick="prepararCancion(${i}, '${c.id}')">Editar</button>
+                        <button class="btn btn-danger p" onclick="eliminarCancion(${i}, '${c.id}')">Eliminar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              `
+            )
+            .join("")}
+            
+        </div>
+
+      </div>
+ 
+   
+    `;
+      tbody.innerHTML = containerHTML;
+    });
+    const campos = [
+      cancion,
+      artista,
+      tono,
+      comuna,
+      cotizacion,
+      fecha,
+      comentarios,
+      telefono,
+      correo,
+      vencimiento,
+    ];
+    // regresar//
+    campos.forEach((campo) => (campo.value = ""));
+    const backToGetData = (document.querySelector("#back").style.display =
+      "none");
+  }
+
+  function nuevaCancion() {
+    cancion;
+    artista;
+    tono;
+    comuna;
+    cotizacion;
+    fecha;
+    vencimiento;
+    comentarios;
+    telefono;
+    correo;
+
+    const id = Math.floor(Math.random() * 9999);
+    let data = {
+      id,
+      titulo: cancion.value,
+      artista: artista.value,
+      tono: tono.value,
+      comuna: comuna.value,
+      cotizacion: cotizacion.value,
+      fecha: fecha.value,
+      vencimiento: vencimiento.value,
+      comentarios: comentarios.value,
+      telefono: telefono.value,
+      correo: correo.value,
+    };
+    console.log(data);
+    axios.post(url, data).then(() => getData());
+  }
+
+  function eliminarCancion(i, id) {
+    axios.delete(url + "/" + id).then(() => {
+      alert("Canción " + canciones[i].titulo + " eliminada");
+      getData();
+    });
+  }
+
+  function prepararCancion(i, id) {
+    cancion.value = canciones[i].titulo;
+    artista.value = canciones[i].artista;
+    tono.value = canciones[i].tono;
+    comuna.value = canciones[i].comuna;
+    cotizacion.value = canciones[i].cotizacion;
+    fecha.value = canciones[i].fecha;
+    vencimiento.value = canciones[i].vencimiento;
+    comentarios.value = canciones[i].comentarios;
+    telefono.value = canciones[i].telefono;
+    correo.value = canciones[i].correo;
+
+    document
+      .getElementById("editar")
+      .setAttribute("onclick", `editarCancion('${id}')`);
+    document.getElementById("agregar").style.display = "none";
+    document.getElementById("editar").style.display = "block";
+  }
+
+  function editarCancion(id) {
+    axios
+      .put(url + "/" + id, {
+        id,
+        titulo: cancion.value,
+        artista: artista.value,
+        tono: tono.value,
+        comuna: comuna.value,
+        cotizacion: cotizacion.value,
+        fecha: fecha.value,
+        vencimiento: vencimiento.value,
+        comentarios: comentarios.value,
+        telefono: telefono.value,
+        correo: correo.value,
+      })
+      .then(() => {
+        getData();
+        document.getElementById("agregar").style.display = "block";
+        document.getElementById("editar").style.display = "none";
+      });
+  }
+  let input = document.getElementById("searchInput");
+  let vencimientoInput = document.getElementById("vencimientoInput");
+  let fechaInput = document.getElementById("fechaInput");
+
+  function buscar() {
+    let input = document.getElementById("searchInput");
+    let vencimientoInput = document.getElementById("vencimientoInput");
+    let fechaInput = document.getElementById("fechaInput");
+    let status = document.getElementById("status");
+    let filter = input.value.toUpperCase();
+    let vencimientoFilter = vencimientoInput.value.toUpperCase();
+    let fechaFilter = fechaInput.value.toUpperCase();
+    let statusFilter = status.value.toUpperCase();
+    let cards = document.querySelectorAll(".card");
+
+    for (let i = 0; i < cards.length; i++) {
+      let card = cards[i];
+      let vencimiento = card.querySelector(".vencimiento").textContent;
+      let fecha_inicio = card.querySelector(".fecha_inicio").textContent;
+      let artist = card.querySelector(".card-subtitle").textContent;
+      let status = card.querySelector(".status").textContent;
+      let found = false;
+
+      if (
+        artist.toUpperCase().indexOf(filter) > -1 &&
+        vencimiento.toUpperCase().indexOf(vencimientoFilter) > -1 &&
+        fecha_inicio.toUpperCase().indexOf(fechaFilter) > -1 &&
+        status.toUpperCase().indexOf(statusFilter) > -1
+      ) {
+        found = true;
+      }
+
+      if (found) {
+        card.classList.remove("d-none");
+        x.style.display = "block";
+      } else {
+        card.classList.add("d-none");
+      }
+    }
+  }
+</script>
